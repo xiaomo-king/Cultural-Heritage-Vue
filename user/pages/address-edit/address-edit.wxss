@@ -1,0 +1,47 @@
+.page {
+  min-height: 100vh;
+  background: #f5f0eb;
+  padding-bottom: 140rpx;
+}
+.form {
+  background: #ffffff;
+  margin: 20rpx 30rpx;
+  border-radius: 16rpx;
+  padding: 0 30rpx;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.form-group:last-child {
+  border-bottom: none;
+}
+.form-label {
+  font-size: 28rpx;
+  color: #2c1810;
+  width: 160rpx;
+  flex-shrink: 0;
+}
+.form-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #2c1810;
+  padding: 4rpx 0;
+}
+.switch-group {
+  justify-content: space-between;
+}
+.save-btn-wrap {
+  margin: 40rpx 30rpx;
+}
+.save-btn {
+  text-align: center;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, #8B1A1A, #C41E3A);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}

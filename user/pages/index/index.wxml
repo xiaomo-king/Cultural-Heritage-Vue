@@ -1,0 +1,76 @@
+<view class="page">
+
+  <!-- 搜索栏 -->
+  <view class="search-bar" catchtap="onSearchTap">
+    <text class="search-icon">🔍</text>
+    <text class="search-text">搜索非遗项目、用户...</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{loading && posts.length === 0}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view wx:if="{{!loadError}}">
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{posts.length === 0 && !loading}}">
+      <text class="empty-icon">📝</text>
+      <text class="empty-text">还没有打卡笔记</text>
+      <text class="empty-sub">去非遗探访页面打卡吧</text>
+    </view>
+
+    <!-- 双列瀑布流 -->
+    <view class="waterfall-wrap" wx:if="{{posts.length > 0}}">
+      <view class="waterfall-col">
+        <view class="feed-card" wx:for="{{leftPosts}}" wx:key="id" data-id="{{item.id}}" catchtap="onPostTap">
+          <image class="card-cover" src="{{item.images && item.images[0] ? item.images[0] : ''}}" mode="aspectFill" lazy-load="{{true}}" wx:if="{{item.images && item.images[0]}}" />
+          <view class="card-body">
+            <view class="card-user">
+              <image class="card-avatar" src="{{item.avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" />
+              <text class="card-nickname">{{item.nickName || '游客'}}</text>
+            </view>
+            <text class="card-title" wx:if="{{item.title}}">{{item.title}}</text>
+            <text class="card-tag" wx:if="{{item.heritageName}}">#{{item.heritageName}}</text>
+            <view class="card-actions">
+              <text class="like-action {{item.isLiked ? 'liked' : ''}}">{{item.isLiked ? '❤️' : '🤍'}} {{item.likeCount || 0}}</text>
+              <text>💬 {{item.commentCount || 0}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="waterfall-col">
+        <view class="feed-card" wx:for="{{rightPosts}}" wx:key="id" data-id="{{item.id}}" catchtap="onPostTap">
+          <image class="card-cover" src="{{item.images && item.images[0] ? item.images[0] : ''}}" mode="aspectFill" lazy-load="{{true}}" wx:if="{{item.images && item.images[0]}}" />
+          <view class="card-body">
+            <view class="card-user">
+              <image class="card-avatar" src="{{item.avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" />
+              <text class="card-nickname">{{item.nickName || '游客'}}</text>
+            </view>
+            <text class="card-title" wx:if="{{item.title}}">{{item.title}}</text>
+            <text class="card-tag" wx:if="{{item.heritageName}}">#{{item.heritageName}}</text>
+            <view class="card-actions">
+              <text class="like-action {{item.isLiked ? 'liked' : ''}}">{{item.isLiked ? '❤️' : '🤍'}} {{item.likeCount || 0}}</text>
+              <text>💬 {{item.commentCount || 0}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{posts.length > 0}}">
+      <text class="load-more-text" wx:if="{{loadingMore}}">加载更多...</text>
+      <text class="load-more-text load-end" wx:if="{{!hasMore && !loadingMore}}">已经到底了</text>
+    </view>
+  </view>
+
+  <!-- 错误 -->
+  <view class="empty-state" wx:if="{{loadError}}">
+    <text class="empty-icon">⚠️</text>
+    <text class="empty-text">加载失败</text>
+    <view class="retry-btn" catchtap="onRetry">重新加载</view>
+  </view>
+
+<custom-tab-bar />
+</view>

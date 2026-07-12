@@ -1,0 +1,37 @@
+# Java / Maven
+backend/target/
+backend/*.jar
+backend/*.war
+backend/logs/
+
+# Uploads（上传的图片保留目录结构，但不提交具体文件）
+backend/uploads/images/heritage/*
+backend/uploads/images/products/*
+backend/uploads/images/posts/*
+backend/uploads/images/avatars/*
+!backend/uploads/images/heritage/.gitkeep
+!backend/uploads/images/products/.gitkeep
+!backend/uploads/images/posts/.gitkeep
+!backend/uploads/images/avatars/.gitkeep
+backend/uploads/*.png
+backend/uploads/*.jpg
+
+# Node
+node_modules/
+admin-dashboard/node_modules/
+admin-dashboard/dist/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+*.log

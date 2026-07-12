@@ -1,0 +1,61 @@
+<view class="page">
+  <!-- 未登录提示 -->
+  <view class="login-prompt" wx:if="{{!hasLogin}}">
+    <text class="login-icon">🛒</text>
+    <text class="login-text">登录后查看购物车</text>
+    <view class="login-btn" catchtap="goToLogin">去登录</view>
+  </view>
+
+  <!-- 空购物车 -->
+  <view class="empty-wrap" wx:elif="{{cartItems.length === 0 && !loading}}">
+    <text class="empty-icon">🛒</text>
+    <text class="empty-text">购物车空空的</text>
+    <text class="empty-desc">去商城逛逛吧</text>
+    <view class="shop-btn" catchtap="goToShop">去逛逛</view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <!-- 购物车列表 -->
+  <view class="cart-list" wx:if="{{cartItems.length > 0}}">
+    <view class="cart-item" wx:for="{{cartItems}}" wx:key="id">
+      <view class="check-box {{item.checked ? 'checked' : ''}}" catchtap="toggleCheck" data-index="{{index}}">
+        <text wx:if="{{item.checked}}">✓</text>
+      </view>
+      <image class="item-image" src="{{item.productImage || '/images/tab_shop.png'}}" mode="aspectFill" lazy-load="{{true}}" catchtap="goToDetail" data-id="{{item.productId}}" />
+      <view class="item-info">
+        <text class="item-name">{{item.productName}}</text>
+        <text class="item-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+        <view class="item-bottom">
+          <text class="item-price">¥{{item.price}}</text>
+          <view class="quantity-control">
+            <view class="qty-btn" catchtap="decreaseQty" data-index="{{index}}">−</view>
+            <text class="qty-num">{{item.quantity}}</text>
+            <view class="qty-btn" catchtap="increaseQty" data-index="{{index}}">+</view>
+          </view>
+        </view>
+      </view>
+      <view class="delete-btn" catchtap="removeItem" data-index="{{index}}">✕</view>
+    </view>
+  </view>
+
+  <!-- 底部结算栏 -->
+  <view class="bottom-bar" wx:if="{{cartItems.length > 0}}">
+    <view class="check-all" catchtap="toggleAll">
+      <view class="check-box {{allChecked ? 'checked' : ''}}">
+        <text wx:if="{{allChecked}}">✓</text>
+      </view>
+      <text class="check-all-text">全选</text>
+    </view>
+    <view class="total-section">
+      <text class="total-label">合计：</text>
+      <text class="total-price">¥{{totalPrice}}</text>
+    </view>
+    <view class="checkout-btn {{selectedCount === 0 ? 'disabled' : ''}}" catchtap="goToCheckout">
+      结算({{selectedCount}})
+    </view>
+  </view>
+</view>

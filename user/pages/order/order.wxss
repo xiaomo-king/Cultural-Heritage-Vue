@@ -1,0 +1,243 @@
+.page {
+  min-height: 100vh;
+  background: #f5f0eb;
+}
+
+/* 搜索栏 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin: 16rpx 30rpx;
+  background: #ffffff;
+  border-radius: 36rpx;
+  padding: 0 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+}
+.search-input {
+  flex: 1;
+  height: 64rpx;
+  font-size: 26rpx;
+  color: #2c1810;
+}
+.search-clear {
+  font-size: 28rpx;
+  color: #ccc;
+  padding: 8rpx;
+  flex-shrink: 0;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: #ffffff;
+  padding: 0 30rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.tab {
+  padding: 24rpx 0;
+  margin-right: 40rpx;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+.tab.active {
+  color: #8B1A1A;
+  font-weight: 600;
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: #8B1A1A;
+  border-radius: 2rpx;
+}
+
+/* 加载 */
+.loading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+.loading-spinner {
+  width: 48rpx;
+  height: 48rpx;
+  border: 4rpx solid #e0e0e0;
+  border-top-color: #8B1A1A;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16rpx;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loading-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 空 */
+.empty-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 30rpx;
+}
+.shop-btn {
+  padding: 20rpx 60rpx;
+  background: #8B1A1A;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+/* 订单卡片 */
+.order-list {
+  padding: 20rpx 30rpx;
+}
+.order-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.order-no {
+  font-size: 22rpx;
+  color: #999;
+}
+.order-status {
+  font-size: 26rpx;
+  color: #8B1A1A;
+  font-weight: 500;
+}
+.order-items {
+  padding: 8rpx 24rpx;
+}
+.order-item {
+  display: flex;
+  padding: 16rpx 0;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.order-item:last-child {
+  border-bottom: none;
+}
+.item-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+.item-info {
+  flex: 1;
+  margin-left: 12rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.item-name {
+  font-size: 26rpx;
+  color: #2c1810;
+}
+.item-spec {
+  font-size: 20rpx;
+  color: #999;
+}
+.item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item-price {
+  font-size: 26rpx;
+  color: #2c1810;
+}
+.item-qty {
+  font-size: 22rpx;
+  color: #999;
+}
+.no-items {
+  font-size: 24rpx;
+  color: #ccc;
+  padding: 20rpx 0;
+}
+.order-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  border-top: 2rpx solid #f5f5f5;
+}
+.order-total {
+  font-size: 24rpx;
+  color: #666;
+}
+.order-price {
+  font-size: 30rpx;
+  color: #C41E3A;
+  font-weight: 600;
+}
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16rpx 24rpx;
+  border-top: 2rpx solid #f5f5f5;
+  gap: 16rpx;
+}
+.action-btn {
+  padding: 12rpx 32rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+}
+.action-btn.primary {
+  background: #8B1A1A;
+  color: #fff;
+}
+.action-btn.outline {
+  border: 2rpx solid #8B1A1A;
+  color: #8B1A1A;
+  background: #fff;
+}
+    .evaluated-tag {
+  font-size: 24rpx;
+  color: #999;
+  padding: 12rpx 0;
+}
+.countdown-timer {
+  font-size: 24rpx;
+  color: #C41E3A;
+  margin-right: 16rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 20rpx 0 40rpx;
+}
+.load-more-text {
+  font-size: 24rpx;
+  color: #bbb;
+}

@@ -1,0 +1,53 @@
+<view class="page">
+  <!-- 加载中 -->
+  <view class="loading-box" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <!-- 草稿列表 -->
+  <view class="draft-section" wx:if="{{drafts.length > 0}}">
+    <view class="section-title-row">
+      <text class="section-title">📝 草稿箱 ({{drafts.length}})</text>
+    </view>
+    <view class="draft-card" wx:for="{{drafts}}" wx:key="id" catchtap="onEditDraft" data-id="{{item.id}}">
+      <image class="draft-cover" src="{{item.images && item.images[0] ? item.images[0] : ''}}" mode="aspectFill" wx:if="{{item.images && item.images[0]}}" />
+      <image class="draft-cover placeholder" src="/images/tab_shop.png" mode="aspectFill" wx:else />
+      <view class="draft-info">
+        <text class="draft-content">{{item.content || '暂无文字内容'}}</text>
+        <text class="draft-time">{{item.createdAt}}</text>
+        <view class="draft-tag">草稿</view>
+      </view>
+      <view class="draft-delete" catchtap="onDeleteDraft" data-id="{{item.id}}">✕</view>
+    </view>
+  </view>
+
+  <!-- 已发布列表 -->
+  <view class="post-section" wx:if="{{posts.length > 0}}">
+    <view class="section-title-row">
+      <text class="section-title">📌 已发布 ({{posts.length}})</text>
+    </view>
+    <view class="post-list">
+      <view class="post-card" wx:for="{{posts}}" wx:key="id" data-id="{{item.id}}" catchtap="onPostTap">
+        <image class="post-cover" src="{{item.images && item.images[0] ? item.images[0] : ''}}" mode="aspectFill" lazy-load="{{true}}" wx:if="{{item.images && item.images[0]}}" />
+        <view class="card-body">
+          <text class="post-content">{{item.content}}</text>
+          <view class="post-meta">
+            <text class="heritage-tag" wx:if="{{item.heritageName}}">{{item.heritageName}}</text>
+            <text class="visibility-tag {{item.visibility}}">{{item.visibility === 'public' ? '公开' : '私密'}}</text>
+          </view>
+          <view class="card-actions">
+            <text class="action-btn edit" catchtap="onEditPost" data-id="{{item.id}}">编辑</text>
+            <text class="action-btn delete" catchtap="onDeletePost" data-id="{{item.id}}">删除</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{posts.length === 0 && drafts.length === 0 && !loading}}">
+    <text class="empty-icon">✏️</text>
+    <text class="empty-text">还没有打卡记录</text>
+    <text class="empty-sub">去非遗探访页面发布第一条打卡吧</text>
+  </view>
+</view>

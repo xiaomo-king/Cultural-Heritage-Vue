@@ -1,0 +1,50 @@
+<view class="page">
+  <view class="logo-area">
+    <view class="logo-icon">🏮</view>
+    <text class="logo-title">江右拾遗</text>
+    <text class="logo-desc">拾江西非遗之美，传千年匠心之韵</text>
+  </view>
+
+  <!-- 登录/注册切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{mode === 'login' ? 'active' : ''}}" catchtap="switchMode" data-mode="login">登录</view>
+    <view class="tab-item {{mode === 'register' ? 'active' : ''}}" catchtap="switchMode" data-mode="register">注册</view>
+  </view>
+
+  <!-- 账号 -->
+  <view class="input-group">
+    <text class="input-label">{{mode === 'login' ? '账号 / 手机号' : '账号'}}</text>
+    <input class="input-field" placeholder="{{mode === 'login' ? '请输入账号或手机号' : '请输入账号（8-15位数字或字母）'}}" value="{{account}}" bindinput="onAccountInput" bindblur="onAccountBlur" maxlength="15" />
+    <text class="field-error" wx:if="{{accountError}}">{{accountError}}</text>
+  </view>
+
+  <!-- 手机号（注册时） -->
+  <view class="input-group" wx:if="{{mode === 'register'}}">
+    <text class="input-label">手机号</text>
+    <input class="input-field" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" bindblur="onPhoneBlur" maxlength="11" type="number" />
+    <text class="field-error" wx:if="{{phoneError}}">{{phoneError}}</text>
+  </view>
+
+  <!-- 密码 -->
+  <view class="input-group">
+    <text class="input-label">密码</text>
+    <input class="input-field" placeholder="请输入密码（6-20位数字或字母）" password="{{true}}" value="{{password}}" bindinput="onPasswordInput" bindblur="onPasswordBlur" maxlength="20" />
+    <text class="field-error" wx:if="{{passwordError}}">{{passwordError}}</text>
+  </view>
+
+  <!-- 确认密码（注册时） -->
+  <view class="input-group" wx:if="{{mode === 'register'}}">
+    <text class="input-label">确认密码</text>
+    <input class="input-field" placeholder="请再次输入密码" password="{{true}}" value="{{confirmPassword}}" bindinput="onConfirmPasswordInput" maxlength="20" />
+  </view>
+
+  <!-- 提交 -->
+  <view class="submit-btn {{canSubmit ? '' : 'disabled'}}" catchtap="onSubmit">
+    <text>{{mode === 'login' ? '登录' : '注册'}}</text>
+  </view>
+
+  <!-- 错误提示 -->
+  <view class="error-tip" wx:if="{{errorMsg}}">
+    <text>{{errorMsg}}</text>
+  </view>
+</view>

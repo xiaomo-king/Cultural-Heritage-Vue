@@ -1,0 +1,59 @@
+<view class="page">
+  <!-- 列表视图 -->
+  <block wx:if="{{!currentRoute}}">
+    <!-- 加载 -->
+    <view class="loading-wrap" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+    </view>
+
+    <!-- 空 -->
+    <view class="empty-wrap" wx:elif="{{!loading && routes.length === 0}}">
+      <text class="empty-icon">🗺️</text>
+      <text class="empty-text">暂无推荐路线</text>
+    </view>
+
+    <!-- 路线列表 -->
+    <view class="route-list" wx:elif="{{routes.length > 0}}">
+      <view class="route-card" wx:for="{{routes}}" wx:key="id" catchtap="showDetail" data-id="{{item.id}}">
+        <view class="card-cover" style="background: linear-gradient(135deg, #8B1A1A, #C41E3A);">
+          <text class="card-emoji">🗺️</text>
+        </view>
+        <view class="card-info">
+          <text class="card-title">{{item.title}}</text>
+          <text class="card-desc">{{item.description}}</text>
+          <view class="card-tags">
+            <text class="tag tag-city">{{item.city}}</text>
+            <text class="tag tag-duration">{{item.duration}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 详情视图 -->
+  <view class="detail-view" wx:else>
+    <view class="detail-header">
+      <text class="back-btn" catchtap="backToList">← 返回</text>
+      <text class="detail-title">{{currentRoute.title}}</text>
+      <view class="detail-meta">
+        <text class="meta-item">📍 {{currentRoute.city}}</text>
+        <text class="meta-item">⏱️ {{currentRoute.duration}}</text>
+      </view>
+      <text class="detail-desc">{{currentRoute.description}}</text>
+    </view>
+
+    <view class="timeline">
+      <view class="timeline-item" wx:for="{{points}}" wx:key="id">
+        <view class="timeline-dot"></view>
+        <view class="timeline-content">
+          <view class="point-header">
+            <text class="point-order">第{{item.pointOrder}}站</text>
+            <text class="point-stay" wx:if="{{item.stayTime}}">⏱️ {{item.stayTime}}</text>
+          </view>
+          <text class="point-name" catchtap="goToHeritage" data-id="{{item.heritageId}}">{{item.heritageName || '非遗项目#' + item.heritageId}}</text>
+          <text class="point-note" wx:if="{{item.note}}">{{item.note}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

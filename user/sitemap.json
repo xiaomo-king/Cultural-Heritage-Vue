@@ -1,0 +1,6 @@
+{
+  "rule": {
+    "action": "allow",
+    "page": "*"
+  }
+}

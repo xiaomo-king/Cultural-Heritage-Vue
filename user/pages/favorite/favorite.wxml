@@ -1,0 +1,54 @@
+<view class="page">
+  <!-- Tab切换 -->
+  <view class="tabs">
+    <view class="tab {{currentTab === 'heritage' ? 'active' : ''}}" catchtap="switchTab" data-type="heritage">非遗项目</view>
+    <view class="tab {{currentTab === 'product' ? 'active' : ''}}" catchtap="switchTab" data-type="product">非遗商品</view>
+    <view class="tab {{currentTab === 'liked' ? 'active' : ''}}" catchtap="switchTab" data-type="liked">点赞的打卡</view>
+  </view>
+
+  <!-- 加载 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <!-- 空数据 -->
+  <view class="empty-wrap" wx:elif="{{!loading && list.length === 0}}">
+    <text class="empty-icon">{{currentTab === 'heritage' ? '🏛️' : currentTab === 'product' ? '📦' : '❤️'}}</text>
+    <text class="empty-text">{{currentTab === 'heritage' ? '还没有收藏非遗项目' : currentTab === 'product' ? '还没有收藏商品' : '还没有点赞打卡'}}</text>
+  </view>
+
+  <!-- 列表 - 收藏非遗/商品 -->
+  <view class="list" wx:if="{{list.length > 0 && currentTab !== 'liked'}}">
+    <view class="card" wx:for="{{list}}" wx:key="id" catchtap="goToDetail" data-item="{{item}}">
+      <image class="card-image" src="{{item.displayImage || '/images/tab_shop.png'}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="card-info">
+        <text class="card-name">{{item.name}}</text>
+        <text class="card-desc" wx:if="{{item.summary}}">{{item.summaryDisplay}}</text>
+        <text class="card-price" wx:elif="{{item.price}}">¥{{item.price}}</text>
+        <text class="card-category">{{item.category}}</text>
+      </view>
+      <view class="fav-btn" catchtap="removeFavorite" data-id="{{item.id}}" data-type="{{currentTab}}">
+        <text>❤️</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 列表 - 点赞的打卡 -->
+  <view class="post-list" wx:if="{{list.length > 0 && currentTab === 'liked'}}">
+    <view class="post-card" wx:for="{{list}}" wx:key="id" catchtap="goToDetail" data-item="{{item}}">
+      <image class="post-cover" src="{{item.displayImage || ''}}" mode="aspectFill" wx:if="{{item.displayImage}}" lazy-load="{{true}}" />
+      <view class="post-body">
+        <text class="post-title" wx:if="{{item.title}}">{{item.title}}</text>
+        <text class="post-content" wx:if="{{item.content}}">{{item.content}}</text>
+        <view class="post-meta">
+          <text class="heritage-tag" wx:if="{{item.heritageName}}">{{item.heritageName}}</text>
+          <text class="post-time">{{item.displayTime}}</text>
+        </view>
+        <view class="post-stats">
+          <text>❤️ {{item.likeCount || 0}}</text>
+          <text>💬 {{item.commentCount || 0}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

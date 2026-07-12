@@ -1,0 +1,77 @@
+{
+  "pages": [
+    "pages/splash/splash",
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/map/map",
+    "pages/shop/shop",
+    "pages/shop-detail/shop-detail",
+    "pages/cart/cart",
+    "pages/checkout/checkout",
+    "pages/payment/payment",
+    "pages/order/order",
+    "pages/order-detail/order-detail",
+    "pages/evaluation/evaluation",
+    "pages/address/address",
+    "pages/address-edit/address-edit",
+    "pages/profile/profile",
+    "pages/login/login",
+    "pages/my-posts/my-posts",
+    "pages/history/history",
+    "pages/favorite/favorite",
+    "pages/edit-profile/edit-profile",
+    "pages/checkin-post/checkin-post",
+    "pages/checkin-detail/checkin-detail",
+    "pages/user-feed/user-feed",
+    "pages/route/route",
+    "pages/search/search"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#8B1A1A",
+    "navigationBarTitleText": "江右拾遗",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f0eb"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#8B1A1A",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现",
+        "iconPath": "images/tab_home.png",
+        "selectedIconPath": "images/tab_home_hl.png"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "text": "探访",
+        "iconPath": "images/tab_map.png",
+        "selectedIconPath": "images/tab_map_hl.png"
+      },
+      {
+        "pagePath": "pages/shop/shop",
+        "text": "好物",
+        "iconPath": "images/tab_shop.png",
+        "selectedIconPath": "images/tab_shop_hl.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab_profile.png",
+        "selectedIconPath": "images/tab_profile_hl.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于标记打卡位置"
+    }
+  }
+}

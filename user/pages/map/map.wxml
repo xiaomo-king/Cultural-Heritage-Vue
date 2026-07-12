@@ -1,0 +1,70 @@
+<view class="page">
+
+  <!-- 加载中 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <view class="loading-text">加载非遗数据...</view>
+  </view>
+
+  <!-- 加载失败 -->
+  <view class="error-wrap" wx:elif="{{error}}">
+    <view class="error-icon">⚠️</view>
+    <view class="error-text">加载失败</view>
+    <view class="retry-btn" catchtap="loadHeritage">重试</view>
+  </view>
+
+  <block wx:else>
+    <!-- 顶部轮播 -->
+    <swiper class="banner" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#8B1A1A" autoplay="{{true}}" interval="4000" circular="{{true}}">
+      <swiper-item wx:for="{{banners}}" wx:key="index" catchtap="onBannerTap" data-id="{{item.id}}">
+        <view class="banner-item">
+          <image class="banner-image" src="{{item.coverImage || ''}}" mode="aspectFill" />
+          <view class="banner-mask">
+            <text class="banner-name">{{item.name}}</text>
+            <text class="banner-category">{{item.category}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+
+    <!-- 分类入口 -->
+    <view class="category-grid">
+      <view class="category-item" wx:for="{{categories}}" wx:key="*this" catchtap="onCategoryTap" data-category="{{item}}">
+        <view class="category-icon">{{categoryIcons[item] || '🏛️'}}</view>
+        <text class="category-name">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 列表标题 -->
+    <view class="section-title-row">
+      <text class="section-title">{{currentCategory || '全部非遗项目'}}</text>
+      <text class="section-count">{{totalCount}}项</text>
+    </view>
+
+    <!-- 非遗列表 -->
+    <scroll-view class="heritage-scroll" scroll-y="{{true}}">
+      <view class="city-group" wx:for="{{cityGroups}}" wx:key="city">
+        <view class="city-header">
+          <text class="city-icon">📍</text>
+          <text class="city-name">{{item.city}}</text>
+          <text class="city-count">{{item.list.length}}项非遗</text>
+        </view>
+        <view class="heritage-grid">
+          <view class="heritage-item" wx:for="{{item.list}}" wx:key="id" catchtap="onItemTap" data-id="{{item.id}}">
+            <image class="item-cover" src="{{item.coverImage || ''}}" mode="aspectFill" lazy-load="{{true}}" />
+            <view class="item-info">
+              <text class="item-name">{{item.name}}</text>
+              <text class="item-category">{{item.category}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="empty-state" wx:if="{{cityGroups.length === 0 && !loading}}">
+        <text class="empty-icon">📍</text>
+        <text class="empty-text">该分类暂无非遗项目</text>
+      </view>
+    </scroll-view>
+  </block>
+<custom-tab-bar />
+</view>

@@ -1,0 +1,37 @@
+<view class="page">
+  <!-- 加载 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <block wx:elif="{{!loading}}">
+    <view class="section">
+      <view class="rating-area">
+        <text class="rating-label">评分</text>
+        <view class="stars">
+          <text class="star {{index < rating ? 'active' : ''}}" wx:for="{{[1,2,3,4,5]}}" wx:key="*this" catchtap="setRating" data-rating="{{item}}">★</text>
+        </view>
+        <text class="rating-text">{{ratingTexts[rating - 1]}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">评价内容</view>
+      <textarea class="content-input" placeholder="分享您的使用体验..." value="{{content}}" bindinput="onContentInput" maxlength="200" />
+      <text class="char-count">{{content.length}}/200</text>
+    </view>
+
+    <view class="section" wx:if="{{items.length > 0}}">
+      <view class="section-title">评价商品</view>
+      <view class="product-item" wx:for="{{items}}" wx:key="id">
+        <image class="product-image" src="{{item.productImage || '/images/tab_shop.png'}}" mode="aspectFill" lazy-load="{{true}}" />
+        <text class="product-name">{{item.productName}}</text>
+      </view>
+    </view>
+
+    <view class="submit-area">
+      <view class="submit-btn" catchtap="submitEvaluation">提交评价</view>
+      <view class="skip-btn" catchtap="skipEvaluation">暂不评价</view>
+    </view>
+  </block>
+</view>

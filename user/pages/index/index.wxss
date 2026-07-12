@@ -1,0 +1,165 @@
+/* pages/index/index.wxss */
+.page {
+  padding-bottom: 140rpx;
+  min-height: 100vh;
+  background: #f5f0eb;
+}
+
+/* ===== 搜索栏 ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin: 20rpx 30rpx;
+  padding: 20rpx 30rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+}
+.search-icon { font-size: 28rpx; margin-right: 12rpx; }
+.search-text { font-size: 26rpx; color: #bbb; }
+
+/* ===== 加载 ===== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200rpx 0;
+}
+.loading-spinner {
+  width: 60rpx; height: 60rpx;
+  border: 4rpx solid #f0e8e0;
+  border-top-color: #8B1A1A;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 20rpx;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-size: 26rpx; color: #999; }
+
+/* ===== 双列瀑布流容器 ===== */
+.waterfall-wrap {
+  display: flex;
+  flex-direction: row;
+  padding: 0 24rpx;
+  gap: 16rpx;
+  align-items: flex-start;
+}
+.waterfall-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  min-width: 0;
+}
+
+/* ===== 瀑布流卡片 ===== */
+.feed-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  width: 100%;
+}
+
+.feed-card .card-cover {
+  width: 100%;
+  display: block;
+  background: #f0e8e0;
+}
+
+.card-body {
+  padding: 18rpx 16rpx 16rpx;
+}
+
+/* 用户行 */
+.card-user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+.card-avatar {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  background: #f0e8e0;
+  flex-shrink: 0;
+}
+.card-nickname {
+  font-size: 24rpx;
+  color: #2c1810;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 标题 */
+.card-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2c1810;
+  line-height: 1.4;
+  margin-bottom: 8rpx;
+  word-break: break-word;
+}
+
+/* 文案 */
+.card-content {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 8rpx;
+  word-break: break-word;
+}
+
+/* 标签 */
+.card-tag {
+  display: inline-block;
+  font-size: 22rpx;
+  color: #8B1A1A;
+  background: #fdf0f0;
+  padding: 4rpx 16rpx;
+  border-radius: 6rpx;
+  margin-bottom: 10rpx;
+}
+
+/* 底部交互 */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  font-size: 22rpx;
+  color: #999;
+}
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200rpx 40rpx;
+}
+.empty-icon { font-size: 80rpx; margin-bottom: 20rpx; }
+.empty-text { font-size: 30rpx; color: #999; margin-bottom: 10rpx; }
+.empty-sub { font-size: 26rpx; color: #ccc; text-align: center; }
+.retry-btn {
+  margin-top: 30rpx;
+  padding: 16rpx 48rpx;
+  background: #8B1A1A;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+/* ===== 加载更多 ===== */
+.load-more { text-align: center; padding: 40rpx; }
+.load-more-text { font-size: 24rpx; color: #ccc; }
+.load-end { color: #ddd; }

@@ -1,0 +1,37 @@
+<view class="page">
+  <!-- Tab 切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'post' ? 'active' : ''}}" catchtap="switchTab" data-tab="post">浏览的打卡</view>
+    <view class="tab-item {{currentTab === 'product' ? 'active' : ''}}" catchtap="switchTab" data-tab="product">浏览的商品</view>
+  </view>
+
+  <!-- 打卡历史 -->
+  <view class="list" wx:if="{{currentTab === 'post'}}">
+    <view class="list-item" wx:for="{{postHistory}}" wx:key="timestamp" data-id="{{item.id}}" catchtap="onPostTap">
+      <image class="item-cover" src="{{item.image || ''}}" mode="aspectFill" lazy-load="{{true}}" wx:if="{{item.image}}" />
+      <view class="item-info">
+        <text class="item-title">{{item.title}}</text>
+        <text class="item-time">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="empty-state" wx:if="{{postHistory.length === 0}}">
+      <text class="empty-icon">📖</text>
+      <text class="empty-text">还没有浏览过打卡记录</text>
+    </view>
+  </view>
+
+  <!-- 商品历史 -->
+  <view class="list" wx:if="{{currentTab === 'product'}}">
+    <view class="list-item" wx:for="{{productHistory}}" wx:key="timestamp" data-id="{{item.id}}" catchtap="onProductTap">
+      <image class="item-cover" src="{{item.image || ''}}" mode="aspectFill" lazy-load="{{true}}" wx:if="{{item.image}}" />
+      <view class="item-info">
+        <text class="item-title">{{item.title}}</text>
+        <text class="item-time">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="empty-state" wx:if="{{productHistory.length === 0}}">
+      <text class="empty-icon">📖</text>
+      <text class="empty-text">还没有浏览过商品</text>
+    </view>
+  </view>
+</view>

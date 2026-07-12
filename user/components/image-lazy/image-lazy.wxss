@@ -1,0 +1,33 @@
+/* components/image-lazy/image-lazy.wxss */
+.image-lazy-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16rpx;
+  background: #f0e8e0;
+}
+
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0e8e0;
+}
+
+.placeholder-icon {
+  font-size: 48rpx;
+  opacity: 0.3;
+}

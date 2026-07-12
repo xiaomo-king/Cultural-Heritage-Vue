@@ -1,0 +1,78 @@
+<view class="page">
+  <!-- 顶部搜索 -->
+  <view class="search-row">
+    <view class="search-bar" catchtap="goToSearch">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索非遗好物</text>
+    </view>
+    <view class="cart-btn" catchtap="goToCart">
+      <text class="cart-icon">🛒</text>
+    </view>
+  </view>
+
+  <!-- 轮播推荐 -->
+  <swiper class="banner" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#8B1A1A" autoplay="{{true}}" interval="4000" circular="{{true}}">
+    <swiper-item wx:for="{{banners}}" wx:key="index">
+      <view class="banner-item" style="background: {{item.bg}};">
+        <text class="banner-title">{{item.title}}</text>
+        <text class="banner-subtitle">{{item.subtitle}}</text>
+        <text class="banner-tag">精选好物</text>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 分类入口 -->
+  <view class="category-grid">
+    <view class="category-item" wx:for="{{categories}}" wx:key="name" catchtap="filterByCategory" data-category="{{item.name}}">
+      <view class="category-icon" style="background: {{item.bg}};">
+        <text class="category-emoji">{{item.icon}}</text>
+      </view>
+      <text class="category-name">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 商品列表头部 -->
+  <view class="section-header">
+    <text class="section-title">{{currentCategory || '全部好物'}}</text>
+    <text class="section-count" wx:if="{{total > 0}}">共 {{total}} 件</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-wrap" wx:if="{{loading && products.length === 0}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 商品瀑布流 -->
+  <view class="product-list" wx:if="{{!loading || products.length > 0}}">
+    <view class="product-card" wx:for="{{products}}" wx:key="id" catchtap="goToDetail" data-id="{{item.id}}">
+      <image class="product-image" src="{{item.firstImage}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="product-info">
+        <text class="product-name">{{item.displayName}}</text>
+        <view class="product-meta">
+          <view class="price-row">
+            <text class="price-symbol">¥</text>
+            <text class="price-num">{{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+          </view>
+          <text class="sales">已售 {{item.sales}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空数据 -->
+  <view class="empty-wrap" wx:if="{{!loading && products.length === 0}}">
+    <text class="empty-icon">📦</text>
+    <text class="empty-text">暂无商品</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore}}">
+    <text class="load-more-text">上滑加载更多</text>
+  </view>
+  <view class="load-more" wx:elif="{{products.length > 0 && !loading}}">
+    <text class="load-more-text">— 已展示全部商品 —</text>
+  </view>
+<custom-tab-bar />
+</view>

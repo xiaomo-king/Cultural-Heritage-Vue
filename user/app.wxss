@@ -1,0 +1,47 @@
+/** 全局样式 - 江右拾遗 **/
+
+/* 页面背景 */
+page {
+  background-color: #f5f0eb;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #333333;
+}
+
+/* 通用卡片样式 */
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  margin: 20rpx 30rpx;
+  padding: 30rpx;
+}
+
+/* 通用按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #8B1A1A, #C41E3A);
+  color: #ffffff;
+  border-radius: 40rpx;
+  padding: 20rpx 60rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+/* 通用标题 */
+.section-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #2c1810;
+  padding: 30rpx 30rpx 20rpx;
+  position: relative;
+}
+
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 6rpx;
+  height: 32rpx;
+  background: #8B1A1A;
+  margin-right: 16rpx;
+  border-radius: 3rpx;
+  vertical-align: middle;
+}

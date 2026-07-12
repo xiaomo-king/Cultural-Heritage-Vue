@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "custom-tab-bar": "/custom-tab-bar/index"
+  },
+  "navigationBarTitleText": "发现",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

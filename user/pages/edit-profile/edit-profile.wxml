@@ -1,0 +1,44 @@
+<view class="page">
+  <view class="form">
+
+    <!-- 头像 -->
+    <view class="form-item">
+      <text class="form-label">头像</text>
+      <view class="avatar-row" catchtap="onChangeAvatar">
+        <image class="form-avatar" src="{{avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" />
+        <text class="change-tip">点击更换</text>
+      </view>
+    </view>
+
+    <!-- 昵称 -->
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input class="form-input" placeholder="输入昵称" value="{{nickName}}" bindinput="onInput" data-field="nickName" maxlength="20" />
+    </view>
+
+    <!-- 性别 -->
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <view class="radio-group">
+        <view class="radio-item {{gender === '男' ? 'active' : ''}}" catchtap="onGenderTap" data-value="男">男</view>
+        <view class="radio-item {{gender === '女' ? 'active' : ''}}" catchtap="onGenderTap" data-value="女">女</view>
+        <view class="radio-item {{gender === '' ? 'active' : ''}}" catchtap="onGenderTap" data-value="">保密</view>
+      </view>
+    </view>
+
+    <!-- 简介 -->
+    <view class="form-item">
+      <text class="form-label">简介</text>
+      <textarea class="form-textarea" placeholder="介绍一下自己..." value="{{bio}}" bindinput="onInput" data-field="bio" maxlength="200" />
+    </view>
+
+    <!-- 所在地 -->
+    <view class="form-item">
+      <text class="form-label">所在地</text>
+      <input class="form-input" placeholder="如：江西景德镇" value="{{location}}" bindinput="onInput" data-field="location" maxlength="30" />
+    </view>
+
+    <!-- 保存 -->
+    <view class="save-btn" catchtap="onSave">保存</view>
+  </view>
+</view>

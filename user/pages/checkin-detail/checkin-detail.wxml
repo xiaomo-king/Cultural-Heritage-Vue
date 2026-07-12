@@ -1,0 +1,89 @@
+<view class="page">
+
+  <view class="loading-box" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+
+  <block wx:else>
+    <swiper class="image-swiper" indicator-dots="{{images.length > 1}}" circular="{{false}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff">
+      <swiper-item wx:for="{{images}}" wx:key="*this">
+        <image class="swiper-img" src="{{item}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+
+    <view class="user-section">
+      <view class="user-left" catchtap="onUserTap">
+        <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" />
+        <view class="user-meta">
+          <text class="user-name">{{userInfo.nickName || '游客'}}</text>
+          <text class="post-time">{{postTime}}</text>
+        </view>
+      </view>
+      <view class="follow-btn {{isFollowing ? 'active' : ''}}" catchtap="onToggleFollow" wx:if="{{userInfo.userId !== myUserId && myUserId}}">
+        <text>{{isFollowing ? '已关注' : '关注'}}</text>
+      </view>
+    </view>
+
+    <view class="title-section" wx:if="{{post.title}}">
+      <text class="title-text">{{post.title}}</text>
+    </view>
+
+    <view class="content-section" wx:if="{{post.content}}">
+      <text class="content-text">{{post.content}}</text>
+    </view>
+
+    <view class="meta-section">
+      <text class="meta-time">🕐 {{postTime}}</text>
+      <text class="meta-location" wx:if="{{post.locationName}}" catchtap="onLocationTap">📍 {{post.locationName}}</text>
+    </view>
+
+    <view class="heritage-link" wx:if="{{post.heritageId}}" catchtap="onHeritageTap">
+      <text class="heritage-icon">🏷️</text>
+      <text class="heritage-name">{{post.heritageName}}</text>
+      <text class="heritage-arrow">›</text>
+    </view>
+
+    <view class="actions-section">
+      <view class="action-btn {{isLiked ? 'liked' : ''}}" catchtap="onToggleLike">
+        <text class="action-icon">{{isLiked ? '❤️' : '🤍'}}</text>
+        <text class="action-count">{{post.likeCount || 0}}</text>
+      </view>
+      <view class="action-btn">
+        <text class="action-icon">💬</text>
+        <text class="action-count">{{post.commentCount || 0}}</text>
+      </view>
+    </view>
+
+    <view class="comment-section">
+      <view class="comment-header">评论</view>
+      <view class="comment-input-area">
+        <input class="comment-input" placeholder="说点什么..." value="{{commentText}}" bindinput="onCommentInput" />
+        <button class="comment-submit" catchtap="onSubmitComment">发表</button>
+      </view>
+
+      <view class="comment-item" wx:for="{{comments}}" wx:key="id">
+        <image class="comment-avatar" src="{{item.avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" lazy-load="{{true}}" catchtap="onCommentUserTap" data-userid="{{item.userId}}" />
+        <view class="comment-body">
+          <view class="comment-top">
+            <text class="comment-nick" catchtap="onCommentUserTap" data-userid="{{item.userId}}">{{item.nickName || '游客'}}</text>
+            <text class="comment-time">{{item.createdAt}}</text>
+          </view>
+          <text class="comment-text">{{item.content}}</text>
+        </view>
+      </view>
+
+      <view class="empty-comment" wx:if="{{comments.length === 0}}">
+        <text>还没有评论</text>
+      </view>
+
+      <!-- 加载更多评论 -->
+      <view class="load-more" wx:if="{{hasMoreComments}}">
+        <text class="load-more-text">下滑加载更多评论</text>
+      </view>
+      <view class="load-more" wx:elif="{{comments.length > 0 && !hasMoreComments}}">
+        <text class="no-more-text">— 共 {{commentTotal}} 条评论 —</text>
+      </view>
+    </view>
+  </block>
+</view>

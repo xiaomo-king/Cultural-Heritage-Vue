@@ -1,0 +1,120 @@
+.page {
+  min-height: 100vh;
+  background: #f5f0eb;
+  padding-bottom: 140rpx;
+}
+.loading-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 60rpx 0;
+}
+.loading-spinner {
+  width: 48rpx;
+  height: 48rpx;
+  border: 4rpx solid #e0e0e0;
+  border-top-color: #8B1A1A;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.address-list {
+  padding: 20rpx 30rpx;
+}
+.address-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.address-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.consignee {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2c1810;
+  margin-right: 16rpx;
+}
+.phone {
+  font-size: 26rpx;
+  color: #666;
+}
+.default-tag {
+  font-size: 20rpx;
+  color: #8B1A1A;
+  background: #fdf0f0;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+  margin-left: 12rpx;
+}
+.address-detail {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+.address-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24rpx;
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 2rpx solid #f5f5f5;
+}
+.action-btn {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+}
+.action-icon {
+  font-size: 28rpx;
+  margin-right: 4rpx;
+}
+.empty-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+.empty-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+.add-btn-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #f5f0eb;
+}
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, #8B1A1A, #C41E3A);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.add-icon {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+}

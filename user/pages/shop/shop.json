@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "非遗好物",
+  "usingComponents": {
+    "custom-tab-bar": "/custom-tab-bar/index"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

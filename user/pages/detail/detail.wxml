@@ -1,0 +1,136 @@
+<!-- pages/detail/detail.wxml -->
+<view class="page">
+
+  <!-- 加载 -->
+  <view class="loading-box" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 加载失败 -->
+  <view class="error-state" wx:elif="{{loadError}}">
+    <text class="empty-icon">⚠️</text>
+    <text class="empty-text">加载失败</text>
+    <view class="retry-btn" catchtap="onRetry">重新加载</view>
+  </view>
+
+  <block wx:else>
+    <!-- 封面图轮播 -->
+    <view class="cover-wrap">
+      <swiper
+        class="cover-swiper"
+        indicator-dots="{{imageList.length > 1}}"
+        circular="{{imageList.length > 1}}"
+        autoplay="{{imageList.length > 1}}"
+        interval="4000"
+        indicator-color="rgba(255,255,255,0.4)"
+        indicator-active-color="#fff"
+        wx:if="{{imageList.length > 0}}"
+      >
+        <swiper-item wx:for="{{imageList}}" wx:key="*this">
+          <image class="cover" src="{{item}}" mode="aspectFill" />
+        </swiper-item>
+      </swiper>
+      <image class="cover" src="{{heritage.coverImage || ''}}" mode="aspectFill" wx:else />
+      <view class="cover-mask">
+        <text class="cover-title">{{heritage.name}}</text>
+      </view>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="info-bar">
+      <view class="info-tags">
+        <text class="tag tag-category">{{heritage.category}}</text>
+        <text class="tag tag-level">{{heritage.level}}</text>
+        <text class="tag tag-city">{{heritage.city}}</text>
+      </view>
+      <view class="info-stats">
+        <text>👁️ {{heritage.viewCount || 0}}次浏览</text>
+        <text>📍 {{heritage.checkinCount || 0}}人打卡</text>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-bar">
+      <view class="action-btn {{isFavorited ? 'active' : ''}}" catchtap="onToggleFavorite">
+        <text>{{isFavorited ? '❤️' : '🤍'}}</text>
+        <text>{{isFavorited ? '已收藏' : '收藏'}}</text>
+      </view>
+      <view class="action-btn primary" catchtap="onGoCheckin">
+        <text>📍</text>
+        <text>去打卡</text>
+      </view>
+      <view class="action-btn primary" catchtap="onViewMap">
+        <text>🗺️</text>
+        <text>看地图</text>
+      </view>
+    </view>
+
+    <!-- 摘要 -->
+    <view class="section">
+      <text class="summary-text">{{heritage.summary}}</text>
+    </view>
+
+    <!-- Tab 切换 -->
+    <view class="tab-bar">
+      <view class="tab-item {{currentTab === item.key ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="key" data-key="{{item.key}}" catchtap="onTabTap">
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+
+    <!-- Tab 内容 -->
+    <view class="section tab-content">
+
+      <!-- 简介 -->
+      <view wx:if="{{currentTab === 'intro'}}">
+        <text class="content-text">{{heritage.description || '暂无介绍'}}</text>
+      </view>
+
+      <!-- 历史 -->
+      <view wx:if="{{currentTab === 'history'}}">
+        <text class="content-text">{{heritage.history || '暂无历史信息'}}</text>
+      </view>
+
+      <!-- 特色 -->
+      <view wx:if="{{currentTab === 'features'}}">
+        <text class="content-text">{{heritage.features || '暂无特色介绍'}}</text>
+      </view>
+
+      <!-- 探访攻略 -->
+      <view wx:if="{{currentTab === 'travel'}}">
+        <view class="travel-item" wx:if="{{heritage.travelTips}}">
+          <text class="travel-label">💡 探访攻略</text>
+          <text class="travel-value">{{heritage.travelTips}}</text>
+        </view>
+        <view class="travel-item" wx:if="{{heritage.visitHours}}">
+          <text class="travel-label">🕐 开放时间</text>
+          <text class="travel-value">{{heritage.visitHours}}</text>
+        </view>
+        <view class="travel-item" wx:if="{{heritage.ticketInfo}}">
+          <text class="travel-label">💰 门票信息</text>
+          <text class="travel-value">{{heritage.ticketInfo}}</text>
+        </view>
+        <view class="travel-item" wx:if="{{heritage.city || heritage.county}}">
+          <text class="travel-label">📍 所在地</text>
+          <text class="travel-value">江西省{{heritage.city}}{{heritage.county}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 关联商品 -->
+    <view class="section" wx:if="{{relatedProducts.length > 0}}">
+      <view class="section-title-row">
+        <text class="section-title">关联非遗好物</text>
+        <text class="section-more" catchtap="onViewProducts">查看全部 ›</text>
+      </view>
+      <scroll-view class="product-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+        <view class="product-card" wx:for="{{relatedProducts}}" wx:key="id" catchtap="goToProduct" data-id="{{item.id}}">
+          <image class="product-image" src="{{item.firstImage}}" mode="aspectFill" />
+          <text class="product-name">{{item.name}}</text>
+          <text class="product-price">¥{{item.price}}</text>
+        </view>
+      </scroll-view>
+    </view>
+
+  </block>
+</view>

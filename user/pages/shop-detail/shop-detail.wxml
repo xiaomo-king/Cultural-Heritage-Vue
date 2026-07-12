@@ -1,0 +1,100 @@
+<view class="page">
+
+  <!-- 加载中 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 内容 -->
+  <block wx:else>
+    <!-- 图片轮播 -->
+    <swiper class="image-swiper" indicator-dots="{{imageList.length > 1}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#8B1A1A" autoplay="{{imageList.length > 1}}" interval="4000" circular="{{imageList.length > 1}}">
+      <swiper-item wx:for="{{imageList}}" wx:key="index">
+        <image class="swiper-image" src="{{item}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+
+    <!-- 价格区 -->
+    <view class="price-section">
+      <view class="price-row">
+        <text class="price-symbol">¥</text>
+        <text class="price-num">{{currentPrice}}</text>
+        <text class="original-price" wx:if="{{currentOriginalPrice > currentPrice}}">¥{{currentOriginalPrice}}</text>
+        <text class="sales-tag">已售 {{product.sales || 0}}</text>
+      </view>
+      <view class="rating-row" wx:if="{{product.rating}}">
+        <text class="rating-stars">{{product.starsDisplay || ''}}</text>
+        <text class="rating-num">{{product.rating}} 分</text>
+      </view>
+    </view>
+
+    <!-- 商品信息 -->
+    <view class="info-section">
+      <text class="product-name">{{product.name}}</text>
+      <text class="product-desc" wx:if="{{product.description}}">{{product.description}}</text>
+    </view>
+
+    <!-- 规格选择 -->
+    <view class="spec-section" wx:if="{{specList.length > 0}}">
+      <text class="spec-label">规格</text>
+      <view class="spec-options">
+        <view class="spec-item {{item === selectedSpec ? 'active' : ''}}" wx:for="{{specList}}" wx:key="*this" catchtap="selectSpec" data-spec="{{item}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数量选择 -->
+    <view class="qty-section">
+      <text class="qty-label">数量</text>
+      <view class="qty-control">
+        <view class="qty-btn" catchtap="decreaseQty">−</view>
+        <input class="qty-input" type="number" value="{{quantity}}" bindinput="onQtyInput" min="1" />
+        <view class="qty-btn" catchtap="increaseQty">+</view>
+      </view>
+    </view>
+
+    <!-- 非遗关联 -->
+    <view class="heritage-link" wx:if="{{heritageName}}" catchtap="goToHeritage">
+      <text class="link-label">关联非遗</text>
+      <view class="link-right">
+        <text class="link-name">{{heritageName}}</text>
+        <text class="link-arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 商家信息 -->
+    <view class="seller-section" wx:if="{{product.seller}}">
+      <text class="seller-label">商家</text>
+      <text class="seller-name">{{product.seller}}</text>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <view class="action-btn" catchtap="goToHome">
+        <text class="action-icon">🏠</text>
+        <text class="action-text">首页</text>
+      </view>
+      <view class="action-btn" catchtap="goToCart">
+        <text class="action-icon">🛒</text>
+        <text class="action-text">购物车</text>
+      </view>
+      <view class="action-btn" catchtap="toggleFavorite">
+        <text class="action-icon">{{isFavorited ? '❤️' : '🤍'}}</text>
+        <text class="action-text">{{isFavorited ? '已收藏' : '收藏'}}</text>
+      </view>
+      <view class="price-summary">
+        <text class="total-price-label">合计</text>
+        <text class="total-price-num">¥{{totalPrice}}</text>
+      </view>
+      <view class="primary-btn add-cart-btn" catchtap="addToCart">加入购物车</view>
+      <view class="primary-btn buy-btn" catchtap="buyNow">立即购买</view>
+    </view>
+  </block>
+
+  <!-- Toast -->
+  <view class="toast {{showToast ? 'toast-show' : ''}}">
+    <text>{{toastText}}</text>
+  </view>
+</view>

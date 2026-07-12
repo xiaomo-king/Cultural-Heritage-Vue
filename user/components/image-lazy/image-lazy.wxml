@@ -1,0 +1,16 @@
+<!-- components/image-lazy/image-lazy.wxml -->
+<view class="image-lazy-container" style="width:{{width}}rpx;height:{{height}}rpx;">
+  <image
+    class="lazy-image {{loaded ? 'loaded' : ''}}"
+    src="{{loaded ? src : ''}}"
+    mode="{{mode}}"
+    style="width:{{width}}rpx;height:{{height}}rpx;"
+    data-id="{{id}}"
+    bindload="onLoad"
+    binderror="onError"
+  />
+  <!-- 骨架屏占位 -->
+  <view class="placeholder" wx:if="{{!loaded}}">
+    <view class="placeholder-icon">📷</view>
+  </view>
+</view>

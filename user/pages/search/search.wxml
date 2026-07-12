@@ -1,0 +1,107 @@
+<view class="page">
+
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="{{fromShop ? '搜索非遗商品' : '搜索非遗项目、用户、话题...'}}" value="{{keyword}}" bindinput="onInput" bindconfirm="onSearch" confirm-type="search" focus="{{autoFocus}}" />
+    <text class="search-cancel" catchtap="onCancel">取消</text>
+  </view>
+
+  <!-- 搜索建议/历史 -->
+  <view class="suggest-section" wx:if="{{!searched && !keyword}}">
+    <view class="suggest-title">热门搜索</view>
+    <view class="suggest-tags">
+      <text class="suggest-tag" wx:for="{{hotKeywords}}" wx:key="*this" data-keyword="{{item}}" catchtap="onTagSearch">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="result-section" wx:if="{{searched}}">
+
+    <!-- Tab栏 -->
+    <view class="search-tabs" wx:if="{{!fromShop}}">
+      <view class="search-tab {{currentTab === 'heritage' ? 'active' : ''}}" catchtap="switchTab" data-tab="heritage">非遗项目</view>
+      <view class="search-tab {{currentTab === 'product' ? 'active' : ''}}" catchtap="switchTab" data-tab="product">非遗商品</view>
+      <view class="search-tab {{currentTab === 'post' ? 'active' : ''}}" catchtap="switchTab" data-tab="post">打卡</view>
+      <view class="search-tab {{currentTab === 'user' ? 'active' : ''}}" catchtap="switchTab" data-tab="user">用户</view>
+    </view>
+
+    <!-- 非遗项目结果 -->
+    <view class="result-group" wx:if="{{currentTab === 'heritage'}}">
+      <view class="heritage-list" wx:if="{{heritageList.length > 0}}">
+        <view class="heritage-card" wx:for="{{heritageList}}" wx:key="id" data-id="{{item.id}}" catchtap="onHeritageTap">
+          <image class="card-cover" src="{{item.coverImage || ''}}" mode="aspectFill" lazy-load="{{true}}" />
+          <view class="card-info">
+            <text class="card-name">{{item.name}}</text>
+            <text class="card-category">{{item.category}} · {{item.city}}</text>
+            <text class="card-summary">{{item.summary}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-state" wx:elif="{{!loading}}">
+        <text class="empty-icon">🏛️</text>
+        <text class="empty-text">没有找到相关非遗项目</text>
+      </view>
+    </view>
+
+    <!-- 商品结果 -->
+    <view class="result-group" wx:elif="{{currentTab === 'product'}}">
+      <view class="product-list" wx:if="{{productList.length > 0}}">
+        <view class="product-card" wx:for="{{productList}}" wx:key="id" data-id="{{item.id}}" catchtap="onProductTap">
+          <image class="card-cover" src="{{item.firstImage || '/images/tab_shop.png'}}" mode="aspectFill" lazy-load="{{true}}" />
+          <view class="card-info">
+            <text class="card-name">{{item.name}}</text>
+            <text class="card-category">{{item.category}} · ¥{{item.price}}</text>
+            <text class="card-summary">已售 {{item.sales || 0}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-state" wx:elif="{{!loading}}">
+        <text class="empty-icon">📦</text>
+        <text class="empty-text">没有找到相关商品</text>
+      </view>
+    </view>
+
+    <!-- 打卡结果 -->
+    <view class="result-group" wx:elif="{{currentTab === 'post'}}">
+      <view class="post-list" wx:if="{{postList.length > 0}}">
+        <view class="post-card" wx:for="{{postList}}" wx:key="id" data-id="{{item.id}}" catchtap="onPostTap">
+          <text class="post-content">{{item.content || '暂无描述'}}</text>
+          <view class="post-meta" wx:if="{{item.heritageName}}">
+            <text class="post-tag">{{item.heritageName}}</text>
+            <text>❤️ {{item.likeCount || 0}}  💬 {{item.commentCount || 0}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-state" wx:elif="{{!loading}}">
+        <text class="empty-icon">📝</text>
+        <text class="empty-text">没有找到相关打卡</text>
+      </view>
+    </view>
+
+    <!-- 用户结果 -->
+    <view class="result-group" wx:elif="{{currentTab === 'user'}}">
+      <view class="user-list" wx:if="{{users.length > 0}}">
+        <view class="user-card" wx:for="{{users}}" wx:key="id" data-id="{{item.id}}" catchtap="onUserTap">
+          <image class="user-avatar" src="{{item.avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" />
+          <view class="user-info">
+            <text class="user-name">{{item.nickName}}</text>
+            <text class="user-meta" wx:if="{{item.bio}}">{{item.bio}}</text>
+            <text class="user-meta" wx:else>{{item.followCount || 0}}关注 · {{item.followerCount || 0}}粉丝 · {{item.checkinCount || 0}}打卡</text>
+          </view>
+          <text class="user-arrow">›</text>
+        </view>
+      </view>
+      <view class="empty-state" wx:elif="{{!loading}}">
+        <text class="empty-icon">👤</text>
+        <text class="empty-text">没有找到相关用户</text>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 加载 -->
+  <view class="loading-box" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+  </view>
+
+</view>

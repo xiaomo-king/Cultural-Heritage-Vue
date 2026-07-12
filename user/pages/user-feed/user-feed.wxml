@@ -1,0 +1,83 @@
+<!-- pages/user-feed/user-feed.wxml -->
+<view class="page">
+
+  <!-- 加载 -->
+  <view class="loading-box" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <block wx:else>
+
+    <!-- 用户信息 -->
+    <view class="user-header">
+      <view class="avatar-section">
+        <image class="user-avatar" src="{{user.avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" lazy-load="{{true}}" />
+        <!-- 编辑按钮（仅自己可见） -->
+        <view class="edit-avatar-btn" catchtap="onEditProfile" wx:if="{{userId === myUserId}}">编辑</view>
+      </view>
+      <text class="user-name">{{user.nickName || '游客'}}</text>
+
+      <!-- 个人信息 -->
+      <view class="user-info-row" wx:if="{{user.bio || user.gender || user.location}}">
+        <text class="user-bio" wx:if="{{user.bio}}">{{user.bio}}</text>
+        <view class="info-tags" wx:if="{{user.gender || user.location}}">
+          <text class="info-tag" wx:if="{{user.gender}}">{{user.gender}}</text>
+          <text class="info-tag" wx:if="{{user.location}}">{{user.location}}</text>
+        </view>
+      </view>
+
+      <!-- 统计 -->
+      <view class="user-stats">
+        <view class="stat-item" catchtap="onFollowings">
+          <text class="stat-num">{{user.followCount || 0}}</text>
+          <text class="stat-label">关注</text>
+        </view>
+        <view class="stat-item" catchtap="onFollowers">
+          <text class="stat-num">{{user.followerCount || 0}}</text>
+          <text class="stat-label">粉丝</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num">{{user.checkinCount || 0}}</text>
+          <text class="stat-label">打卡</text>
+        </view>
+      </view>
+
+      <!-- 关注按钮（他人可见） -->
+      <view class="follow-btn {{isFollowing ? 'active' : ''}}" catchtap="onToggleFollow" wx:if="{{userId !== myUserId && myUserId}}">
+        <text>{{isFollowing ? '已关注' : '+ 关注'}}</text>
+      </view>
+
+      <!-- 编辑资料按钮（自己可见） -->
+      <view class="edit-profile-btn" catchtap="onEditProfile" wx:if="{{userId === myUserId}}">✏️ 编辑资料</view>
+    </view>
+
+    <!-- 打卡列表标题 -->
+    <view class="section-title">
+      <text class="title-line"></text>
+      <text wx:if="{{userId === myUserId}}">我的打卡</text>
+      <text wx:else>{{user.nickName || '他'}}的打卡</text>
+    </view>
+
+    <!-- 打卡列表 -->
+    <view class="post-list">
+      <view class="post-card" wx:for="{{posts}}" wx:key="id" data-id="{{item.id}}" catchtap="onPostTap">
+        <image class="post-cover" src="{{item.images && item.images[0] ? item.images[0] : ''}}" mode="aspectFill" lazy-load="{{true}}" wx:if="{{item.images && item.images[0]}}" />
+        <view class="post-info" wx:if="{{!item.images || !item.images[0]}}">
+          <text class="post-content-preview">{{item.content}}</text>
+        </view>
+        <view class="post-meta">
+          <text class="heritage-tag" wx:if="{{item.heritageName}}">{{item.heritageName}}</text>
+          <text class="visibility-tag" wx:if="{{userId === myUserId}}">{{item.visibility === 'public' ? '公开' : '私密'}}</text>
+          <text class="post-time">{{item.createdAt}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{posts.length === 0}}">
+      <text class="empty-icon">📝</text>
+      <text class="empty-text">还没有打卡记录</text>
+    </view>
+
+  </block>
+</view>

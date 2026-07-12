@@ -1,0 +1,54 @@
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 8rpx 0;
+  padding-bottom: calc(8rpx + env(safe-area-inset-bottom));
+  border-top: 2rpx solid #f0f0f0;
+  z-index: 999;
+}
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  position: relative;
+}
+.tab-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+.tab-text {
+  font-size: 20rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+.tab-item.selected .tab-text {
+  color: #8B1A1A;
+  font-weight: 500;
+}
+
+/* 中间+按钮 */
+.center-btn {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B1A1A, #C41E3A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 20rpx rgba(139, 26, 26, 0.4);
+  margin-top: -24rpx;
+}
+.center-plus {
+  font-size: 52rpx;
+  color: #fff;
+  font-weight: 300;
+  line-height: 1;
+}

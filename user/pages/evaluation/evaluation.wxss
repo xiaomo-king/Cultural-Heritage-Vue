@@ -1,0 +1,94 @@
+.page {
+  min-height: 100vh;
+  background: #f5f0eb;
+}
+.section {
+  background: #ffffff;
+  margin: 20rpx 30rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.rating-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+}
+.rating-label {
+  font-size: 28rpx;
+  color: #2c1810;
+  margin-bottom: 20rpx;
+}
+.stars {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.star {
+  font-size: 56rpx;
+  color: #e0e0e0;
+}
+.star.active {
+  color: #D4A853;
+}
+.rating-text {
+  font-size: 26rpx;
+  color: #999;
+}
+.section-title {
+  font-size: 28rpx;
+  color: #2c1810;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+}
+.content-input {
+  width: 100%;
+  min-height: 160rpx;
+  font-size: 26rpx;
+  color: #2c1810;
+  padding: 8rpx 0;
+}
+.char-count {
+  text-align: right;
+  font-size: 22rpx;
+  color: #ccc;
+}
+.product-item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+.product-image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  background: #f0f0f0;
+  margin-right: 16rpx;
+}
+.product-name {
+  font-size: 26rpx;
+  color: #2c1810;
+}
+.submit-area {
+  margin: 40rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+}
+.submit-btn {
+  width: 100%;
+  text-align: center;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, #8B1A1A, #C41E3A);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+.skip-btn {
+  font-size: 26rpx;
+  color: #999;
+  padding: 16rpx;
+}

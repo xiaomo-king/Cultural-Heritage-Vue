@@ -1,0 +1,89 @@
+<view class="page">
+
+  <!-- 未登录 -->
+  <view class="user-section" wx:if="{{!hasLogin}}">
+    <view class="login-area" catchtap="goToLogin">
+      <view class="avatar-placeholder">👤</view>
+      <text class="login-text">点击登录</text>
+      <text class="login-desc">登录后可查看订单、打卡足迹等</text>
+    </view>
+  </view>
+
+  <!-- 已登录 -->
+  <view class="user-section logged-in" wx:else>
+    <view class="user-header">
+      <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/tab_profile.png'}}" mode="aspectFill" />
+      <view class="user-meta">
+        <text class="user-name">{{userInfo.nickName || '游客'}}</text>
+        <view class="meta-row">
+          <view class="balance-row" catchtap="onRecharge">
+            <text class="balance-label">余额</text>
+            <text class="balance-num">¥ {{balance}}</text>
+            <text class="recharge-btn">充值</text>
+          </view>
+          <view class="profile-btn" catchtap="goToMyProfile">个人主页 ›</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-card" wx:if="{{hasLogin}}">
+    <view class="stat-item" catchtap="goToOrder" data-status="all">
+      <text class="stat-label">全部订单</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item" catchtap="goToOrder" data-status="shipped">
+      <text class="stat-label">待收货</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item" catchtap="goToOrder" data-status="received">
+      <text class="stat-label">待评价</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-list">
+    <view class="menu-item" catchtap="goToMyPosts">
+      <text class="menu-icon">✏️</text>
+      <text class="menu-text">我的打卡</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" catchtap="goToFavorite">
+      <text class="menu-icon">❤️</text>
+      <text class="menu-text">我的收藏</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" catchtap="goToHistory">
+      <text class="menu-icon">🕐</text>
+      <text class="menu-text">历史记录</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" catchtap="goToPage" data-page="address">
+      <text class="menu-icon">📍</text>
+      <text class="menu-text">收货地址</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" catchtap="goToFollow">
+      <text class="menu-icon">👥</text>
+      <text class="menu-text">关注/粉丝</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" catchtap="onRecharge">
+      <text class="menu-icon">💰</text>
+      <text class="menu-text">余额充值</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" catchtap="onLogout" wx:if="{{hasLogin}}">
+      <text class="menu-icon">🚪</text>
+      <text class="menu-text">退出登录</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" catchtap="goToAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于江右拾遗</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+<custom-tab-bar />
+</view>

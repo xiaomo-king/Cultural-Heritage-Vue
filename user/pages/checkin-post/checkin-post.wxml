@@ -1,0 +1,110 @@
+<view class="page">
+
+  <!-- 标题 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">打卡标题</text>
+    </view>
+    <input class="title-input" placeholder="给这次打卡取个标题..." value="{{title}}" bindinput="onTitleInput" maxlength="50" />
+  </view>
+
+  <!-- 打卡图片 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">打卡图片</text>
+      <text class="section-count">{{images.length}}/9</text>
+    </view>
+    <view class="image-grid">
+      <view class="image-item" wx:for="{{images}}" wx:key="*this">
+        <image class="preview-img" src="{{item}}" mode="aspectFill" />
+        <view class="del-btn" data-index="{{index}}" catchtap="onDeleteImage">×</view>
+      </view>
+      <view class="image-picker" wx:if="{{images.length < 9}}" catchtap="onChooseImage">
+        <text class="picker-icon">+</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 关联非遗项目 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">关联非遗项目</text>
+    </view>
+    <picker mode="selector" range="{{heritageList}}" range-key="name" bindchange="onHeritageChange">
+      <view class="heritage-select">
+        <text class="select-text" wx:if="{{!heritageId}}">请选择关联的非遗项目（选填）</text>
+        <view class="selected-heritage" wx:else>
+          <text class="selected-name">{{heritageName}}</text>
+          <text class="selected-change">更换</text>
+        </view>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 打卡感悟 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">打卡感悟</text>
+    </view>
+    <textarea class="content-input" placeholder="分享你的非遗探访体验..." value="{{content}}" bindinput="onContentInput" maxlength="500" auto-height />
+    <text class="char-count">{{content.length}}/500</text>
+  </view>
+
+  <!-- 打卡位置 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">打卡位置</text>
+    </view>
+    <picker mode="selector" range="{{cities}}" bindchange="onCityChange">
+      <view class="location-bar">
+        <text class="location-icon">📍</text>
+        <text class="location-text" wx:if="{{!locationName}}">点击选择城市</text>
+        <text class="location-text active" wx:else>{{locationName}}</text>
+      </view>
+    </picker>
+    <view class="location-input-area" wx:if="{{locationName}}">
+      <view class="location-divider"></view>
+      <input class="location-input" placeholder="可手动修改" value="{{locationName}}" bindinput="onLocationInput" />
+    </view>
+  </view>
+
+  <!-- 可见性 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">可见性</text>
+    </view>
+    <view class="visibility-options">
+      <view class="visibility-item {{visibility === 'public' ? 'active' : ''}}" catchtap="setVisibility" data-visibility="public">
+        <text class="vis-icon">🌍</text>
+        <view class="vis-info">
+          <text class="vis-label">公开</text>
+          <text class="vis-desc">所有人可见</text>
+        </view>
+        <text class="vis-check {{visibility === 'public' ? 'checked' : ''}}">✓</text>
+      </view>
+      <view class="visibility-item {{visibility === 'private' ? 'active' : ''}}" catchtap="setVisibility" data-visibility="private">
+        <text class="vis-icon">🔒</text>
+        <view class="vis-info">
+          <text class="vis-label">仅自己可见</text>
+          <text class="vis-desc">只有自己能查看</text>
+        </view>
+        <text class="vis-check {{visibility === 'private' ? 'checked' : ''}}">✓</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="submit-bar">
+    <button class="draft-btn" catchtap="onSaveDraft">保存草稿</button>
+    <button class="submit-btn {{canSubmit ? '' : 'disabled'}}" disabled="{{!canSubmit}}" catchtap="onSubmit">发布打卡</button>
+  </view>
+
+  <!-- 加载遮罩 -->
+  <view class="loading-mask" wx:if="{{submitting}}">
+    <view class="loading-box">
+      <view class="loading-spinner"></view>
+      <text class="loading-tip">发布中...</text>
+    </view>
+  </view>
+
+</view>

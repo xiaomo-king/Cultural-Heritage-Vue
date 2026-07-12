@@ -1,0 +1,39 @@
+<view class="page">
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <view class="address-list" wx:elif="{{addressList.length > 0}}">
+    <view class="address-card" wx:for="{{addressList}}" wx:key="id" catchtap="selectAddress" data-id="{{item.id}}">
+      <view class="address-header">
+        <text class="consignee">{{item.consignee}}</text>
+        <text class="phone">{{item.phone}}</text>
+        <view class="default-tag" wx:if="{{item.isDefault == 1}}">默认</view>
+      </view>
+      <text class="address-detail">{{item.region}} {{item.detail}}</text>
+      <view class="address-actions">
+        <view class="action-btn" catchtap="editAddress" data-id="{{item.id}}">
+          <text class="action-icon">✏️</text>
+          <text>编辑</text>
+        </view>
+        <view class="action-btn" catchtap="deleteAddress" data-id="{{item.id}}">
+          <text class="action-icon">🗑️</text>
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-wrap" wx:elif="{{!loading}}">
+    <text class="empty-icon">📍</text>
+    <text class="empty-text">还没有收货地址</text>
+    <text class="empty-desc">添加地址以便下单</text>
+  </view>
+
+  <view class="add-btn-wrap">
+    <view class="add-btn" catchtap="addAddress">
+      <text class="add-icon">+</text>
+      <text>新增收货地址</text>
+    </view>
+  </view>
+</view>

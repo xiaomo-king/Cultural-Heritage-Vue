@@ -1,0 +1,11 @@
+<view class="tab-bar">
+  <view class="tab-item {{selected === index ? 'selected' : ''}}" wx:for="{{list}}" wx:key="index" catchtap="switchTab" data-index="{{index}}">
+    <block wx:if="{{!item.isCenter}}">
+      <image class="tab-icon" src="{{selected === index ? item.selectedIconPath : item.iconPath}}" mode="aspectFit" />
+      <text class="tab-text">{{item.text}}</text>
+    </block>
+    <view wx:else class="center-btn">
+      <text class="center-plus">+</text>
+    </view>
+  </view>
+</view>

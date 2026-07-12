@@ -1,0 +1,247 @@
+/* pages/detail/detail.wxss */
+.page {
+  padding-bottom: 60rpx;
+  background: #f5f0eb;
+}
+
+/* ===== 加载 ===== */
+.loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200rpx 0;
+  color: #999;
+}
+.loading-spinner {
+  width: 60rpx; height: 60rpx;
+  border: 4rpx solid #f0e8e0;
+  border-top-color: #8B1A1A;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 20rpx;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== 封面 ===== */
+.cover-wrap {
+  position: relative;
+  width: 100%;
+  height: 500rpx;
+}
+.cover {
+  width: 100%;
+  height: 100%;
+  background: #f0e8e0;
+}
+.cover-swiper {
+  width: 100%;
+  height: 100%;
+}
+.cover-mask {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 80rpx 30rpx 30rpx;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+.cover-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ===== 信息栏 ===== */
+.info-bar {
+  background: #fff;
+  padding: 24rpx 30rpx;
+  margin-bottom: 2rpx;
+}
+.info-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+.tag {
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+.tag-category { background: #f5f0eb; color: #8B1A1A; }
+.tag-level { background: #fff5f5; color: #C41E3A; }
+.tag-city { background: #f0f5eb; color: #2E7D32; }
+.info-stats {
+  display: flex;
+  gap: 24rpx;
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* ===== 操作按钮 ===== */
+.action-bar {
+  display: flex;
+  background: #fff;
+  padding: 20rpx 30rpx;
+  gap: 16rpx;
+  margin-bottom: 2rpx;
+}
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  padding: 0 24rpx;
+  border: 1px solid #ddd;
+  color: #666;
+  flex: 1;
+}
+.action-btn.active {
+  background: #fff5f5;
+  color: #C41E3A;
+  border-color: #C41E3A;
+}
+.action-btn.primary {
+  background: #8B1A1A;
+  color: #fff;
+  border-color: #8B1A1A;
+}
+
+/* ===== 摘要 ===== */
+.section {
+  background: #fff;
+  padding: 24rpx 30rpx;
+  margin-bottom: 16rpx;
+}
+.summary-text {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ===== Tab 栏 ===== */
+.tab-bar {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 0;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #999;
+  position: relative;
+}
+.tab-item.active {
+  color: #8B1A1A;
+  font-weight: 600;
+}
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 30rpx;
+  height: 4rpx;
+  background: #8B1A1A;
+  border-radius: 2rpx;
+}
+
+/* ===== Tab 内容 ===== */
+.tab-content {
+  min-height: 200rpx;
+}
+.content-text {
+  font-size: 28rpx;
+  line-height: 1.9;
+  color: #444;
+  white-space: pre-wrap;
+}
+
+/* ===== 探访攻略 ===== */
+.travel-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24rpx;
+}
+.travel-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #8B1A1A;
+  margin-bottom: 8rpx;
+}
+.travel-value {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ===== 关联商品 ===== */
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2c1810;
+}
+.section-more {
+  font-size: 24rpx;
+  color: #8B1A1A;
+}
+.product-scroll {
+  display: flex;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding-bottom: 12rpx;
+}
+.product-card {
+  display: inline-flex;
+  flex-direction: column;
+  width: 220rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+.product-image {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+}
+.product-name {
+  font-size: 24rpx;
+  color: #2c1810;
+  margin-top: 10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-price {
+  font-size: 26rpx;
+  color: #C41E3A;
+  font-weight: 600;
+  margin-top: 4rpx;
+}
+
+/* ===== 通用状态 ===== */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200rpx 40rpx;
+}
+.empty-icon { font-size: 80rpx; margin-bottom: 20rpx; }
+.empty-text { font-size: 28rpx; color: #666; margin-bottom: 30rpx; }
+.retry-btn {
+  padding: 18rpx 48rpx;
+  background: #8B1A1A;
+  color: #fff;
+  border-radius: 36rpx;
+  font-size: 26rpx;
+}
