@@ -35,7 +35,6 @@ Page({
 
     api.getPostList({ page: currentPage, size, userId }).then(res => {
       const list = (res && res.list) || res || [];
-      // 未登录时默认 isLiked = false
       list.forEach(p => { if (p.isLiked === undefined) p.isLiked = false; });
 
       const currentPosts = that.data.posts;

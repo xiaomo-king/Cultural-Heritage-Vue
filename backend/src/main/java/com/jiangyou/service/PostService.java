@@ -19,10 +19,7 @@ public class PostService {
     }
 
     public Page<Post> getPostList(String topic, Long userId, int page, int size) {
-        if (userId != null) {
-            // 查看自己的：全部可见（public + private）
-            return postRepository.findByUserIdAndStatusOrderByCreatedAtDesc(userId, 1, PageRequest.of(page, size));
-        }
+        // userId 只用于首页点赞状态判断，不用于数据过滤
         if (topic != null && !topic.isEmpty()) {
             return postRepository.findByTopicAndVisibilityAndStatus(topic, "public", 1, PageRequest.of(page, size));
         }
